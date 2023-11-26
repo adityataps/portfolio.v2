@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,28 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+
+
+.grid-background {
+  display: grid;
+  grid-template-columns: repeat(25, 20px);
+  /* 5 columns, 20px each */
+  grid-template-rows: repeat(50, 20px);
+  /* 5 rows, 20px each */
+  gap: 24px;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+
+.circle {
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+  border-radius: 50%;
+  transition:  0.5s;
+  transition-timing-function: ease-out;
 }

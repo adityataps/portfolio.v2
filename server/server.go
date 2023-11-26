@@ -4,12 +4,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"portfolioV2/graph"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-
-	"github.com/joho/godotenv"
+	"portfolio.v2/graph"
 )
 
 const defaultPort = "8080"
@@ -19,13 +17,8 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
-	Database := graph.Connect()
-	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{DB: Database}}))
+	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
