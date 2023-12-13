@@ -1,0 +1,11 @@
+#iconsContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: calc(64px + 16px);
+    padding: 8px;
+    top: 16px;
+    position: relative;
+    border: 1px solid black;
+}
+

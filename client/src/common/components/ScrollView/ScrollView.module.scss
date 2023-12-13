@@ -1,0 +1,8 @@
+.scrollView {
+    width: 100vw;
+    height: 100vh;
+    outline: 5px dashed black;
+    outline-offset: -16px;
+    scroll-snap-align: start;
+    // scroll-padding-top: 96px;
+}

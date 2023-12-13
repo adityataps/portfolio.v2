@@ -1,0 +1,40 @@
+#navbar {
+    height: 128px;
+    bottom: 0;
+    // top: calc(100vh - 128px);
+    position: absolute;
+    background: rgba($color: white, $alpha: 0.5);
+    width: 100vw;
+    
+    font-family: 'Volkhov', serif;
+
+    --bs-navbar-brand-font-size: 36px;
+    --bs-nav-link-font-size: 24px;
+    --bs-navbar-nav-link-padding-x: 16px;
+
+    .linkSeparator {
+        pointer-events: none;
+        font-size: 24px;
+    }
+
+}
+
+// .navbar-text {
+//     // font-family: 'Volkhov', serif;
+//     // font-size: 24px;
+// }
+
+
+.link-separator {
+    font-size: 24px;
+    pointer-events: none;
+}
+
+.sticky {
+    position: fixed !important;
+    top: 0;
+}
+
+.scrollView + .sticky {
+    padding-top: 96px;
+}
