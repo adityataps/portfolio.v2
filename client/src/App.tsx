@@ -1,105 +1,103 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Element, scroller } from 'react-scroll';
-import './App.scss';
+import styles from './App.module.scss';
+import './common/styles.scss';
 
 import Home from './pages/home';
-
-
+import About from './pages/about';
+import Blog from './pages/blog';
 import NavBar from './common/components/NavBar'
-
-
-
 import ScrollView from './common/components/ScrollView'
 
-
-
-const routes = [
-  "/",
-  "/about",
-  "/blog",
-  "/experiences",
-  "/resume", 
-  "/contact",
-]
+// const routes = [
+//   "/",
+//   "/about",
+//   "/blog",
+//   "/experiences",
+//   "/resume", 
+//   "/contact",
+// ]
 
 function App() {
+  const observer = useRef<IntersectionObserver | null>(null);
 
-  
+  const [currScrollView, setCurrScrollView] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setCurrScrollView(entry.target.id);
+          const newRoute = `#${entry.target.id}`
+          window.history.replaceState(null, null, newRoute);
+        }
+      });
+    };
+
+    // Create an IntersectionObserver
+    observer.current = new IntersectionObserver(handleIntersection, {
+      root: null,
+      threshold: 1.0,
+      rootMargin: "128px",
+    });
+
+    // Get a list of elements to observe (replace with your element IDs)
+    const elementsToObserve = document.getElementsByClassName(styles.scrollViewComponent);
+
+    // Start observing each element
+    Object.values(elementsToObserve).forEach((element) => {
+      observer.current?.observe(element);
+    });
+
+    // Clean up the observer when the component unmounts
+    return () => {
+      observer.current?.disconnect();    };
+  }, []); // The empty dependency array ensures this effect runs once after initial render
+
+  console.log(currScrollView);
 
   return (
-    <div className='views-container'>
-      <NavBar />
-      <ScrollView id="/" color="pink" height="calc(100vh - 128px)">
+    <div className={styles.viewsContainer}>
+      <NavBar currRoute={currScrollView} />
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/"
+        color="pink"
+        height="calc(100vh - 128px)"
+      >
         <Home />
       </ScrollView>
-      <ScrollView id="/about" color="lightgreen" />
-      <ScrollView id="/blog" color="lightblue" />
-      <ScrollView id="/experiences" color="gray" />
-      <ScrollView id="/resume" color="lightyellow" />
-      <ScrollView id="/contact" color="orange" />
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/about"
+        color="lightgreen"
+      >
+        <About />
+        </ScrollView>
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/blog"
+        color="lightblue"
+      >
+        <Blog />
+      </ScrollView>
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/experiences"
+        color="gray"
+      />
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/resume"
+        color="lightyellow"
+      />
+      <ScrollView
+        classNames={styles.scrollViewComponent}
+        id="/contact"
+        color="orange"
+      />
     </div>
   );
 }
 
 export default App
-
-
-
-
-
-// // import React from 'react';
-// // import './GridBackground.css';
-
-// function GridBackground() {
-
-//   // Inside the GridBackground component
-
-//   const generateGrid = (numCircles) => {
-//     const grid = [];
-//     for (let i = 0; i < numCircles; i++) {
-//       grid.push(<div className="circle" key={i}></div>);
-//     }
-//     return grid;
-//   };
-
-//   const handleMouseMove = (e: MouseEvent) => {
-//     const circles = document.querySelectorAll('.circle') as NodeListOf<HTMLDivElement>;
-
-//     const cursorX = e.clientX;
-//     const cursorY = e.clientY;
-
-//     circles.forEach((circle) => {
-//       const circleX = circle.offsetLeft + circle.offsetWidth / 2;
-//       const circleY = circle.offsetTop + circle.offsetHeight / 2;
-//       const deltaX = cursorX - circleX;
-//       const deltaY = cursorY - circleY;
-//       // const angle = Math.atan2(deltaY, deltaX);
-//       const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-
-//       const maxDistance = 100; // Adjust this value to control the interaction range
-
-//       if (distance < maxDistance) {
-//         const scale = 1 - distance / maxDistance;
-//         const transform = `translate(-50%, -50%) scale(${scale})`;
-//         circle.style.transform = transform;
-//       } else {
-//         circle.style.transform = 'translate(-50%, -50%) scale(1)';
-//       }
-//     });
-//   };
-
-
-
-//   window.addEventListener('mousemove', handleMouseMove);
-
-//   // console.log('testing')
-
-//   return (
-//     <div className="grid-background">
-//       {generateGrid(500)} {/* Adjust the number of circles as needed */}
-//     </div>
-//   );
-
-// }
-
-// export default GridBackground;

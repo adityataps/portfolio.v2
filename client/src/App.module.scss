@@ -66,8 +66,16 @@
 }
 */
 
-.views-container {
+.viewsContainer {
   height: 100vh;
+  font-family: 'Volkhov', serif;
 
-
+  .scrollViewComponent {
+    color: black;
+  }
 }
+
+
+
+
+

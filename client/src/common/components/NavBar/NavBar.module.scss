@@ -5,6 +5,7 @@
     position: absolute;
     background: rgba($color: white, $alpha: 0.5);
     width: 100vw;
+    z-index: 100;
     
     font-family: 'Volkhov', serif;
 
@@ -17,6 +18,10 @@
         font-size: 24px;
     }
 
+}
+
+#navbarBrand {
+    transition: 1s;
 }
 
 // .navbar-text {
@@ -37,4 +42,26 @@
 
 .scrollView + .sticky {
     padding-top: 96px;
+}
+
+// .homePageBrand {
+//     // display: none;
+//     // visibility: hidden;
+//     font-size: 0;
+// }
+
+// .navLinks {
+//     transition: 1s;
+// }
+
+.navLink {
+    color: purple;
+    transition: 0.5s;
+}
+
+.selectedNav {
+    transition: 0.5s;
+    text-shadow: -4px -2px 1px rgba(220, 20, 60, 0.8), 4px 2px 1px rgba(0, 255, 255, 0.8);
+    -webkit-text-stroke: 0.1px black;
+    // --bs-navbar-active-color: white;
 }
