@@ -1,0 +1,5 @@
+Here is the input JSON. Remember to use string template literal expressions (`${currentTime}`, `${currentDate}`, `${temperatureValue}`, `${temperatureUnit}`).
+
+<Input>
+${inputJson}
+</Input>

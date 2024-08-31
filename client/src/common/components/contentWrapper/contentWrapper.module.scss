@@ -1,0 +1,11 @@
+.wrapper {
+    height: calc(100vh - 128px);
+    top: 128px;
+    width: 100vw;
+    position: relative;
+}
+
+.wrapper.landingPage {
+    height: 100vh;
+    top: 0;
+}
